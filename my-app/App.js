@@ -37,13 +37,16 @@ import { View, Text, Button, TouchableOpacity, Image, StyleSheet } from "react-n
 import MyImage from "./assets/favicon.png"
 import { StatusBar } from "react-native";
 import Component from "./Component";
+import Component1 from "./component1";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 const App = () => {
   return (
     <>
       <SafeAreaProvider>
-        <Component />
+        <Component1 />
       </SafeAreaProvider>
+      
+      
     </>
   )
 }
