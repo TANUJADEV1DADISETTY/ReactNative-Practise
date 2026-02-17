@@ -2,7 +2,7 @@ import react from "react";
 import { useState } from "react";
 import { View ,StyleSheet,StatusBar} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ActivityIndicator, Badge, Button } from "react-native-paper";
+import { ActivityIndicator, Badge, Button, Icon, TextInput } from "react-native-paper";
 const Component2Paper = () =>{
     const Results = useSafeAreaInsets();
     console.log(Results)
@@ -25,7 +25,7 @@ const Component2Paper = () =>{
                 style = {Mystyles.badgeStyle}>24
             </Badge> */}
 
-            <Button
+            {/* <Button
                 mode="contained"
                 // mode = "outlined"
                 icon={"home"}
@@ -38,6 +38,16 @@ const Component2Paper = () =>{
             >
                 Click me!!
             </Button>
+
+
+            <Icon source="home" size={50} color="black" /> */}
+
+            <TextInput
+                mode="flat" 
+                label={"Email"}
+                // secureTextEntry
+                error={true}
+            />
         </>
     )
 }
