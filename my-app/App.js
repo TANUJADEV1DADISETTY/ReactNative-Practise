@@ -38,12 +38,13 @@ import MyImage from "./assets/favicon.png"
 import { StatusBar } from "react-native";
 import Component from "./Component";
 import Component1 from "./component1";
+import Component2Paper from "./Component2Paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 const App = () => {
   return (
     <>
       <SafeAreaProvider>
-        <Component1 />
+        <Component2Paper/>
       </SafeAreaProvider>
       
       
