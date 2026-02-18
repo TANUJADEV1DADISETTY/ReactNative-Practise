@@ -45,7 +45,7 @@ const Component2Paper = () =>{
             <TextInput
                 mode="flat" 
                 label={"Email"}
-                // secureTextEntry
+                secureTextEntry
                 error={true}
             />
         </>

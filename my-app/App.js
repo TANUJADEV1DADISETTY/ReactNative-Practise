@@ -39,12 +39,13 @@ import { StatusBar } from "react-native";
 import Component from "./Component";
 import Component1 from "./component1";
 import Component2Paper from "./Component2Paper";
+import ReactPaperTask from "./ReactPaperTask";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 const App = () => {
   return (
     <>
       <SafeAreaProvider>
-        <Component2Paper/>
+        <ReactPaperTask />
       </SafeAreaProvider>
       
       
