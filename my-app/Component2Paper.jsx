@@ -3,7 +3,7 @@ import { useState } from "react";
 import { View ,StyleSheet,StatusBar} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import myImage from "./assets/Person_1.jpg"
-import { ActivityIndicator, Badge, Button, Icon, TextInput, Dialog, Text, Card } from "react-native-paper";
+import { ActivityIndicator, Badge, Button, Icon, TextInput, Dialog, Text, Card, Snackbar, List } from "react-native-paper";
 const Component2Paper = () =>{
     const Results = useSafeAreaInsets();
     console.log(Results)
@@ -61,7 +61,9 @@ const Component2Paper = () =>{
                     <Button onPress = {() => setStatus(!status)} mode = "outlined">I am bad</Button>
                 </Dialog.Actions>
             </Dialog> */}
-            <Card mode = "outlined">
+
+
+            {/* <Card mode = "outlined">
                 <Card.Cover source = {myImage} />
                 <Card.Content>
                     <Text>Helloooooooooooooooooooooooooooooooooooo</Text>
@@ -70,7 +72,31 @@ const Component2Paper = () =>{
                     <Button>Know more</Button>
                     <Button>Know about</Button>
                 </Card.Actions>
-            </Card>
+            </Card> */}
+
+            {/* <Button mode = "contained" onPress = {() => setStatus(!status)}>Show dialog box</Button>
+            <Snackbar 
+                visible = {status} 
+                duration={2000} 
+                onDismiss={()=>setStatus(!status)}
+                Icon = {'close'}
+                onIconPress={() => setStatus(!status)}
+                >
+                Pleasee close this!!!!
+            </Snackbar> */}
+
+            <List.Section>
+                <List.Accordion title = "Fruits">
+                    <List.Item title = "Mango"></List.Item>
+                    <List.Item title = "Orange"></List.Item>
+                    <List.Item title = "Kiwi"></List.Item>
+                </List.Accordion>
+                <List.Accordion title = "Movies">
+                    <List.Item title = "Kalki"></List.Item>
+                    <List.Item title = "Saalar"></List.Item>
+                    <List.Item title = "Baahubali"></List.Item>
+                </List.Accordion>
+            </List.Section>
         </>
     )
 }
