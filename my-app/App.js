@@ -45,7 +45,7 @@ const App = () => {
   return (
     <>
       <SafeAreaProvider>
-        <ReactPaperTask />
+        <Component2Paper />
       </SafeAreaProvider>
       
       
