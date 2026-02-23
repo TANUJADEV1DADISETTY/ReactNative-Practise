@@ -41,11 +41,35 @@ import Component1 from "./component1";
 import Component2Paper from "./Component2Paper";
 import ReactPaperTask from "./ReactPaperTask";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import Home from "./Home";
+import Contact from "./Contact";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Icon } from "react-native-paper";
+
 const App = () => {
+  const stack = createNativeStackNavigator()
   return (
     <>
       <SafeAreaProvider>
-        <Component2Paper />
+        <NavigationContainer>
+          <stack.Navigator 
+              screenOptions={{
+                // title : "Hello"
+                // headerShown : false
+                // headerStyle : {backgroundColor : "pink"}
+                // headerTintColor : "red"
+                // headerTitleStyle : {fontSize : 30, fontFamily : "Italic"}
+                // headerTitleAlign : "center"
+                headerRight : () => <Icon source={"bell"} size={30}/>,
+                animation:"fade"             
+              }}
+          >
+            <stack.Screen name = "Home" component={Home} />
+            <stack.Screen name = "Contact" component={Contact} />
+          </stack.Navigator>
+        </NavigationContainer>
       </SafeAreaProvider>
       
       
