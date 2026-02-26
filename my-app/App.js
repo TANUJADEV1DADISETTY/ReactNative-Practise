@@ -45,23 +45,27 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Home from "./Home";
 import Contact from "./Contact";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Icon } from "react-native-paper";
+import { BottomTabBarHeightContext, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import ToptabNavigation from "./ToptabNavigation";
+
 
 const App = () => {
-  const stack = createNativeStackNavigator()
+  // const stack = createNativeStackNavigator()
+  const bottomtab = createBottomTabNavigator();
   return (
     <>
-      <SafeAreaProvider>
-        <NavigationContainer>
+      {/* <SafeAreaProvider> */}
+        {/* <NavigationContainer>
           <stack.Navigator 
               screenOptions={{
-                // title : "Hello"
-                // headerShown : false
-                // headerStyle : {backgroundColor : "pink"}
-                // headerTintColor : "red"
-                // headerTitleStyle : {fontSize : 30, fontFamily : "Italic"}
-                // headerTitleAlign : "center"
+                title : "Hello",
+                headerShown : false,
+                headerStyle : {backgroundColor : "pink"},
+                headerTintColor : "red",
+                headerTitleStyle : {fontSize : 30, fontFamily : "Italic"},
+                headerTitleAlign : "center",
                 headerRight : () => <Icon source={"bell"} size={30}/>,
                 animation:"fade"             
               }}
@@ -69,7 +73,39 @@ const App = () => {
             <stack.Screen name = "Home" component={Home} />
             <stack.Screen name = "Contact" component={Contact} />
           </stack.Navigator>
+        </NavigationContainer> */}
+
+
+
+        {/* <NavigationContainer>
+            <bottomtab.Navigator
+                    screenOptions={({route})=>({
+                      tabBarIcon:({focused,color})=>{
+                        let IconName;
+                        if(route.name == 'Home'){
+                           IconName = focused ? 'home' : "home-outline"
+                        }
+                        if(route.name == "Contact"){
+                          IconName = focused ? "cog" : "cog-outline"
+                        }
+                        return <Icon source={IconName} size={30} color={color}/>
+                      },
+                      tabBarActiveTintColor:"green",
+                      tabBarInactiveTintColor:"black",
+                      headerShown:false,
+                      headerStyle:{
+                        
+                      }
+                    })}
+                  >
+            <bottomtab.Screen name = "Home" component={Home} />
+            <bottomtab.Screen name = "Contact" component={Contact} />
+          </bottomtab.Navigator>
         </NavigationContainer>
+      </SafeAreaProvider> */}
+
+      <SafeAreaProvider>
+        <ToptabNavigation />
       </SafeAreaProvider>
       
       
