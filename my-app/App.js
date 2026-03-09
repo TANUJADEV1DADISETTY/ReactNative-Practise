@@ -127,24 +127,88 @@
 
 
 
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+// import React from "react";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import Home from "./Home";
-import Contact from "./Contact";
+// import Home from "./Home";
+// import Contact from "./Contact";
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
-const App = () => {
+// const App = () => {
+//   return (
+//     // <NavigationContainer>
+//     //   <Drawer.Navigator>
+//     //     <Drawer.Screen name="Home" component={Home} />
+//     //     <Drawer.Screen name="Contact" component={Contact} />
+//     //   </Drawer.Navigator>
+//     // </NavigationContainer>
+//     <>
+//       <Home />
+//     </>
+//   );
+// };
+
+// export default App;
+
+
+import React, { useState } from "react";
+import { View } from "react-native";
+import { Button } from "react-native-paper";
+import { Audio } from "expo-av"
+export default function App() {
+  const [MyRecording, setMyRecording] = useState(null)
+  const [Uri, setUri] = useState(null)
+  const Start = async () => {
+    try {
+
+      const permission = await Audio.requestPermissionsAsync();
+      console.log(permission);
+
+      if (!permission.granted) {
+        alert("Microphone permission is required");
+        return;
+      }
+      
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true
+      })
+
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
+      )
+      setMyRecording(recording);
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+  const Stop = async () => {
+    console.log(MyRecording)
+    await MyRecording.stopAndUnloadAsync();
+    console.log(MyRecording.getURI())
+    setUri(MyRecording.getURI())
+  }
+
+  const Play = async () => {
+    
+    try {
+      console.log(Uri)
+      const { sound } = await Audio.Sound.createAsync({ uri : Uri })
+      await sound.playAsync()
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Contact" component={Contact} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <View style={{ marginTop: 100 }}>
+      <Button onPress={Start}>Start Recording</Button>
+      <Button onPress={Stop}>Stop Recording</Button>
+      <Button onPress={Play}>Play Recording</Button>
+    </View>
   );
-};
+}
 
-export default App;
