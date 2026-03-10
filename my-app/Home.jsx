@@ -75,7 +75,7 @@ const Home = () => {
   }
   if(!permission.granted){
     return(
-      <Button onPress={() =>RequestCamAccess}>RequestCamAccess</Button>
+      <Button onPress={() => RequestCamAccess()}>RequestCamAccess</Button>
     )
   } 
   const Capture = async() =>{

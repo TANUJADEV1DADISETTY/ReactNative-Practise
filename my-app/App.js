@@ -153,62 +153,85 @@
 // export default App;
 
 
-import React, { useState } from "react";
-import { View } from "react-native";
-import { Button } from "react-native-paper";
-import { Audio } from "expo-av"
-export default function App() {
-  const [MyRecording, setMyRecording] = useState(null)
-  const [Uri, setUri] = useState(null)
-  const Start = async () => {
-    try {
+// import React, { useState } from "react";
+// import { View } from "react-native";
+// import { Button } from "react-native-paper";
+// import { Audio } from "expo-av"
+// export default function App() {
+//   const [MyRecording, setMyRecording] = useState(null)
+//   const [Uri, setUri] = useState(null)
+//   const Start = async () => {
+//     try {
 
-      const permission = await Audio.requestPermissionsAsync();
-      console.log(permission);
+//       const permission = await Audio.requestPermissionsAsync();
+//       console.log(permission);
 
-      if (!permission.granted) {
-        alert("Microphone permission is required");
-        return;
-      }
+//       if (!permission.granted) {
+//         alert("Microphone permission is required");
+//         return;
+//       }
       
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true
-      })
+//       await Audio.setAudioModeAsync({
+//         allowsRecordingIOS: true,
+//         playsInSilentModeIOS: true
+//       })
 
-      const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      )
-      setMyRecording(recording);
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
-  const Stop = async () => {
-    console.log(MyRecording)
-    await MyRecording.stopAndUnloadAsync();
-    console.log(MyRecording.getURI())
-    setUri(MyRecording.getURI())
-  }
+//       const { recording } = await Audio.Recording.createAsync(
+//         Audio.RecordingOptionsPresets.HIGH_QUALITY
+//       )
+//       setMyRecording(recording);
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+//   }
+//   const Stop = async () => {
+//     console.log(MyRecording)
+//     await MyRecording.stopAndUnloadAsync();
+//     console.log(MyRecording.getURI())
+//     setUri(MyRecording.getURI())
+//   }
 
-  const Play = async () => {
+//   const Play = async () => {
     
-    try {
-      console.log(Uri)
-      const { sound } = await Audio.Sound.createAsync({ uri : Uri })
-      await sound.playAsync()
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
-  return (
-    <View style={{ marginTop: 100 }}>
-      <Button onPress={Start}>Start Recording</Button>
-      <Button onPress={Stop}>Stop Recording</Button>
-      <Button onPress={Play}>Play Recording</Button>
-    </View>
-  );
-}
+//     try {
+//       console.log(Uri)
+//       const { sound } = await Audio.Sound.createAsync({ uri : Uri })
+//       await sound.playAsync()
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+//   }
+//   return (
+//     <View style={{ marginTop: 100 }}>
+//       <Button onPress={Start}>Start Recording</Button>
+//       <Button onPress={Stop}>Stop Recording</Button>
+//       <Button onPress={Play}>Play Recording</Button>
+//     </View>
+//   );
+// }
 
+
+
+import React from "react";
+import {View, Text} from "react-native";
+import { Button } from "react-native-paper";
+import * as LocalAuthentication from "expo-local-authentication"
+export default function App() {
+  const Open = async() => {
+
+    const status = await LocalAuthentication.hasHardwareAsync();
+    console.log("hardware", status)
+
+    const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+    console.log("Enrolled", isEnrolled);
+    await LocalAuthentication.authenticateAsync()
+  }
+
+return(
+  <View style = {{marginTop : 100}}>
+    <Button onPress={Open}>Click</Button>
+  </View>
+);
+}
